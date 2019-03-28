@@ -1,0 +1,15 @@
+{
+    "name": "drinkReminder",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "zy",
+    "scripts": {
+        "start": "node src/install-service.js"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "mysql": "^2.16.0",
+        "node-schedule": "^1.3.1",
+        "node-windows": "^0.1.14"
+    }
+}
