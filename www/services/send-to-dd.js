@@ -4,6 +4,8 @@
  */
 const schedule = require("node-schedule");
 
- module.exports = {
+schedule.scheduleJob("0 0 7 * * 1-5", function () {
     // TODO: ....
- }
+    // console.log("scheduleCronstyle:" + new Date());
+    // job();
+});

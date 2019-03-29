@@ -5,10 +5,10 @@ const registerRouter = require('./routes')
 const serve = require('koa-static')
 const path = require('path')
 const open = require('open')
-const logger = require('./logger')
+const logger = require('./logger') // 简单日志
 const argvs = require('./process.args')
 const os = require('os')
-const services = require('./services/send-to-dd')
+require('./services/send-to-dd') // 钉钉发送定时服务
 
 app.use(bodyParser())
 
@@ -25,15 +25,14 @@ app.use(async (ctx, next) => {
 
 app.use(registerRouter())
 
-let port = argvs.port || 1001;
-
-app.listen(port)
+app.listen(argvs.port || 1001)
     .on("error", err => {
         logger.error(err)
     })
-    .on("listening", () => {
-        logger.log('start successed at ' + port)
+    .on("listening", function () {
+        let host = `127.0.0.1:${this.address().port}`
+        logger.log(`start successed at ${host}`)
         if(argvs.mode === 'dev') {
-            open(`127.0.0.1:${port}`, {app: [os.platform().indexOf('win') === 0 ? 'chrome' : 'google chrome']});
+            open(host, {app: [os.platform().indexOf('win') === 0 ? 'chrome' : 'google chrome']});
         }
     });
