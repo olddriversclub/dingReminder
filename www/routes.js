@@ -11,7 +11,7 @@ let registerRouter = () => {
         if (fs.existsSync(fileDir)) {
             let route = require(fileDir)
             if (!route.opts.prefix) {
-                route.prefix(`/api/${subDir}`)
+                route.prefix(`/api/${subDir.replace('-', '').toLowerCase()}`)
             }
             routers.push(route.routes())
             routers.push(route.allowedMethods())
