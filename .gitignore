@@ -1,4 +1,7 @@
 /config/ding-token.local.js
-/src/utils/specialWater.js
+/srcold/utils/specialWater.js
 /node_modules
-/src/win-service/daemon
+/srcold/win-service/daemon
+/log
+/.vscode
+yarn-error.log
