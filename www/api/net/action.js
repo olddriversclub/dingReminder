@@ -23,13 +23,22 @@ module.exports = {
     async save(ctx, next) {
         let data=ctx.query.obj;
         data =  JSON.parse(data);
-        let sqlSend='insert into task ( url , sendData , createAt ) values ( "'+data.url+'" , "' +data.date+ '" , "'+ moment().format('YYYY-MM-DD h:mm:ss') +'")';
-        connection.query(sqlSend);
-        ctx.body={
-            "data":true,
-            "state": {},
-            "msg": "success"
-        };
+        if(!data.url||!data.date){
+            ctx.body={
+                "data":false,
+                "state": {},
+                "msg": "参数不能为空"
+            };
+            return false;
+        }else{
+            let sqlSend='insert into task ( url , sendData , createAt ) values ( "'+data.url+'" , "' +data.date+ '" , "'+ moment().format('YYYY-MM-DD h:mm:ss') +'")';
+            connection.query(sqlSend);
+            ctx.body={
+                "data":true,
+                "state": {},
+                "msg": "success"
+            };
+        }
     },
 
     async getList(ctx,next){
