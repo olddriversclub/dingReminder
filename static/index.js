@@ -1,10 +1,12 @@
 import './index.css';
 import $ from 'jquery';
+import moment from 'moment';
 
 
 $(function(){ 
 　　function save(url,date){
-        fetch('api/net/save?obj='+JSON.stringify({"url":url,"date":date}))
+        debugger;
+        fetch('api/net/save?obj='+JSON.stringify({"url":encodeURIComponent(url),"date":date}))
         .then(response => {
            response.json();
         })
@@ -31,7 +33,7 @@ $(function(){
                 html+='<li class="list-add">'
                 html+='<div class="list-flex">'+(idx-0+1)+'</div>'
                 html+='<div class="list-flex">'+element.url+'</div>'
-                html+='<div class="list-flex">'+element.sendData+'</div>'
+                html+='<div class="list-flex">'+moment(element.sendData).format('YYYY-MM-DD')+'</div>'
                 html+='<div class="list-flex"><button type="button" onclick="delet('+element.id+',this)">删除</button></div>'
                 html+='</li>'
                 $('.list-box').append(html);
@@ -41,6 +43,7 @@ $(function(){
         });
     }
     getList();
+    console.log('提出合理的原因，有问题可以找我修复一下。----xb-csy');
 }); 
 window.delet=(id,dom)=>{
     fetch('api/net/delete?id='+JSON.stringify(id))
