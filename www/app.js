@@ -12,10 +12,15 @@ require('./services/send-to-dd') // 钉钉发送定时服务
 
 app.use(bodyParser())
 
+app.use(serve(
+    path.join( __dirname, '../www')
+))
+
 app.use(serve(path.resolve(__dirname, "../static"), {
     maxAge: 1000 * 60 * 60 * 24 * 7,
     index: 'index.html',
 }));
+
 
 app.use(async (ctx, next) => {
     ctx.argvs = argvs

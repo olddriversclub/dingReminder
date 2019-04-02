@@ -2,13 +2,22 @@ let mysql = require("mysql");
 let utils = require("../utils/utils");
 
 let connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
+    host: "192.168.20.179",
+    user: "admin",
     password: "123456",
     // database: "water_test"
-    database: "ding_teacher"
+    // database: "ding_teacher"
+    database:"ding_teacher_test",
+    port:'3306'
 });
-connection.connect();
+
+connection.connect(function(err){
+    if(err){
+        console.log(err);
+    }else{
+        console.log('success');
+    }
+});
 
 async function myWait(fun) {
     return new Promise((res, rej) => {
